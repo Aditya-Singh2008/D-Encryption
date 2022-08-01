@@ -1,4 +1,4 @@
-int inputlen();
+int processinput();
 int filewrite(char *filesname, int *pta, int charlen);
 void getkey();
 void shiftrow1(int *pta);
@@ -45,7 +45,7 @@ int filewrite(char *filesname, int *pta, int charlen){
   fclose(writefile);
 }
 
-int inputlen(){
+int processinput(){
   printf("[Enter Input]: ");
   int input;
   int sum = 1;
