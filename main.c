@@ -12,7 +12,7 @@ int main(int argc, char *argv[]){
 
     if(strcmp(argv[1], "-Ett") == 0){
         getkey();
-        charlen = inputlen();
+        charlen = processinput();
         ptrascii = (int*) realloc(ptrascii, sizeof(int) * charlen);
 
         shiftrow1(ptrascii);
@@ -36,7 +36,7 @@ int main(int argc, char *argv[]){
 
     else if(strcmp(argv[1], "-Dtt") == 0){
         getkey();
-        charlen = inputlen();
+        charlen = processinput();
         ptrascii = (int*) realloc(ptrascii, sizeof(int) * charlen);
 
         xor2(ptrascii);
@@ -124,7 +124,7 @@ int main(int argc, char *argv[]){
         free(ptrascii);
     }else if(strcmp(argv[1], "-Etf") == 0){
         getkey();
-        charlen = inputlen();
+        charlen = processinput();
         ptrascii = (int*) realloc(ptrascii, sizeof(int) * charlen);
 
         shiftrow1(ptrascii);
@@ -136,7 +136,7 @@ int main(int argc, char *argv[]){
         free(ptrascii);
     }else if(strcmp(argv[1], "-Dtf") == 0){
         getkey();
-        charlen = inputlen();
+        charlen = processinput();
         ptrascii = (int*) realloc(ptrascii, sizeof(int) * charlen);
 
         xor2(ptrascii);
