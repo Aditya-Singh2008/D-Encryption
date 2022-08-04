@@ -34,13 +34,10 @@ int inputfilelen(char *filesname){
 
 int filewrite(char *filesname, int *pta, int charlen){
   FILE *writefile = fopen(filesname, "w");
-  if(writefile == NULL){
-    printf("Enter a valid file name");
-    exit(1);
-  }
-  int input;
-  for(int element = 0; element < charlen; element++){
+  int element = 0;
+  while(*(pta + element) != EOF){
     fputc(*(pta + element), writefile);
+    element++;
   }
   fclose(writefile);
 }
