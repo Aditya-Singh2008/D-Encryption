@@ -9,6 +9,8 @@ void textout(int *pta, int total);
 void ippass(int *pointer_ascii);
 int blockphrase(int *pointer_ascii, BLOCK32 *pointer_block, int block_no);
 int blockwrite(BLOCK32 *pointer_block, int block_count);
+void block_shift1(BLOCK32 *pointer_block);
+void block_shift2(BLOCK32 *pointer_block);
 
 typedef struct BLOCK32
 {
@@ -145,6 +147,34 @@ void getkey()
     		}
     		element++;
   	}
+}
+
+void block_shift1(BLOCK32 *pointer_block){
+    int swicher;
+
+    do
+    {
+        for(int yaxis = 0; yaxis < 8; yaxis++)
+        {
+            swicher = (pointer_block)->bl[yaxis][1];
+            (pointer_block)->bl[yaxis][1] = (pointer_block)->bl[yaxis][2];
+            (pointer_block)->bl[yaxis][2] = swicher;
+        }
+    } while((pointer_block++)->bl[8][4] != 0);
+}
+
+void block_shift2(BLOCK32 *pointer_block){
+    int swicher;
+
+    do
+    {
+        for(int yaxis = 0; yaxis < 8; yaxis++)
+        {
+            swicher = (pointer_block)->bl[yaxis][0];
+            (pointer_block)->bl[yaxis][0] = (pointer_block)->bl[yaxis][2];
+            (pointer_block)->bl[yaxis][2] = swicher;
+        }
+    } while((pointer_block++)->bl[8][4] != 0);
 }
 
 void shiftrow1(int *pta)
