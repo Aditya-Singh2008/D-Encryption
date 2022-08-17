@@ -6,6 +6,13 @@ void shiftrow2(int *pta);
 void xor1(int *pta);
 void xor2(int *pta);
 void textout(int *pta, int total);
+void ippass(int *pointer_ascii);
+int blockphrase(int *pointer_ascii, BLOCK32 *pointer_block, int block_no);
+
+typedef struct BLOCK32
+{
+	int bl[8][4] ;
+} BLOCK32;
 
 int keyexpand[4] = {2, 3, 2, 3};
 char key[4] = {0};
@@ -13,6 +20,40 @@ char keyxored[4] = {0};
 int charlen;
 int *tempascii = NULL;
 int *ptrascii = NULL;
+
+void ippass(int *pointer_ascii)
+{
+	while((*pointer_ascii++ = getchar()) != EOF)
+		;
+	*--pointer_ascii = '\0';
+}
+
+
+int blockphrase(int *pointer_ascii, BLOCK32 *pointer_block, int block_no)
+{
+    int block_element = 0;
+	while(block_element < block_no)
+	{
+		for(int yaxis = 0; yaxis < 8; yaxis++)
+		{
+			for(int xaxis = 0; xaxis < 4; xaxis++)
+			{
+				if(*pointer_ascii != '\0')
+				{
+					(pointer_block + block_element)->bl[yaxis][xaxis] = *pointer_ascii++;
+				}
+				else
+				{
+					(pointer_block + block_element)->bl[yaxis][xaxis] = 0;
+					goto breakout;
+				}
+			}
+		}
+        block_element++;
+	}
+	breakout:
+	return (block_element + 1);
+}
 
 int inputfilelen(char *filesname){
   FILE *readfile = fopen(filesname, "r");
