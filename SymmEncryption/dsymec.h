@@ -24,30 +24,30 @@ int charlen;
 int *tempascii = NULL;
 int *ptrascii = NULL;
 
+
 int blockwrite(BLOCK32 *pointer_block, int block_count)
 {
-    int block_element = 0, input;
-	while(block_element < block_count)
-	{
-		for(int yaxis = 0; yaxis < 8; yaxis++)
-		{
-			for(int xaxis = 0; xaxis < 4; xaxis++)
-			{
-				if((input = getchar()) != EOF)
-				{
-					(pointer_block + block_element)->bl[yaxis][xaxis] = input;
-				}
-				else
-				{
-					(pointer_block + block_element)->bl[yaxis][xaxis] = 0;
-					goto breakout;
-				}
-			}
-		}
-        block_element++;
-	}
-	breakout:
-	return (block_element + 1);
+    int block_element = 0, input = 0, xaxis = 0, yaxis = 0;
+	while((input = getchar()) != EOF)
+    {
+        (pointer_block + block_element)->bl[yaxis][xaxis] = input;
+        xaxis++;
+        if(xaxis == 4)
+        {
+            xaxis = 0;
+            yaxis++;
+            if(yaxis == 8)
+            {
+                yaxis = 0;
+                block_element++;
+                if(block_element == block_count)
+                {
+                    break;
+                }
+            }
+        }
+    }
+    return (block_element + 1);
 }
 
 void ippass(int *pointer_ascii)
